@@ -14,7 +14,6 @@ export const withRxJs = (selector) =>{
         firstClick = 0,
         doubleClickLength = 299
 
-
     const getTime = () => {
         if (sec < 60) {
             return `${hours < 10 ? '0' + hours : hours}:${min < 10 ? '0' + min : min}:${sec < 10 ? '0' + sec : sec}`
@@ -79,8 +78,6 @@ export const withRxJs = (selector) =>{
                     showNulls()
                     action('startStop')
                 }
-                break
-            case 'wait':
                 break
             default:
                 break

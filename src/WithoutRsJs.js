@@ -1,5 +1,6 @@
 
 export const WithoutRxJs = (selector)=>{
+
     const display = document.querySelector(`#${selector}-display`)
     const startStopButton = document.querySelector(`#${selector}-startStop`)
     const resetButton = document.querySelector(`#${selector}-reset`)
@@ -32,21 +33,17 @@ export const WithoutRxJs = (selector)=>{
         }
     }
 
-    const timer = observers => {
+    const timer = observer => {
         setInterval(() => {
-            const time = getTime()
-            observers.forEach(e => e(time))
+            observer(1)
         }, timeout)
     }
 
-    const timerDisplay = currentTime => {
-        display.textContent = currentTime
-    }
-
-    const tic = () => {
-        if (isTimerActive) {
-            sec++
+    const timerDisplay = val => {
+        if (isTimerActive){
+            sec=sec+val
         }
+        display.textContent = getTime()
     }
 
     const doubleClickListener = () => {
@@ -63,13 +60,12 @@ export const WithoutRxJs = (selector)=>{
         }
     }
 
-    const observers = [timerDisplay, tic]
-
-    timer(observers)
+    timer(timerDisplay)
 
     startStopButton.addEventListener('click', () => {
         if (isTimerActive) {
             hours = min = sec = 0
+            display.textContent = getTime()
             isTimerActive = false
         } else isTimerActive = true
 
@@ -78,6 +74,7 @@ export const WithoutRxJs = (selector)=>{
     resetButton.addEventListener('click', () => {
         if (hours || min || sec) {
             hours = min = sec = 0
+            display.textContent = getTime()
             isTimerActive = true
         }
     })
